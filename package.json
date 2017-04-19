@@ -1,0 +1,37 @@
+{
+  "name": "hane-import-wordpress",
+  "version": "1.0.0",
+  "description": "A wordpress data import tool for hanejs.",
+  "main": "index.js",
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "fs-extra-promise": "^0.4.1",
+    "he": "^1.1.1",
+    "js-beautify": "^1.6.8",
+    "mysql": "^2.13.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-preset-es2017-node7": "^0.4.1"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanejs/hane-import-wordpress.git"
+  },
+  "keywords": [
+    "hanejs",
+    "hane",
+    "import",
+    "wordpress"
+  ],
+  "author": "tengattack",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hanejs/hane-import-wordpress/issues"
+  },
+  "homepage": "https://github.com/hanejs/hane-import-wordpress#readme"
+}
