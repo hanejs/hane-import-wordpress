@@ -13,7 +13,7 @@ const db = new Database(config['mysql'])
 function term_tag_convert(term) {
   return {
     name: term.name,
-    slug: term.slug,
+    slug: decodeURI(term.slug),
   }
 }
 
@@ -75,7 +75,7 @@ async function main() {
                         .map(tag => tag.name)
       const fileName = generateName(post.post_date, 'post')
       const p = {
-        slug: post.post_name,
+        slug: decodeURI(post.post_name),
         title: post.post_title,
         create_time: post.post_date,
         update_time: post.post_modified,
@@ -102,7 +102,7 @@ async function main() {
     _pages.forEach(page => {
       const fileName = generateName(page.post_date, 'page')
       const p = {
-        slug: page.post_name,
+        slug: decodeURI(page.post_name),
         title: page.post_title,
         create_time: page.post_date,
         update_time: page.post_modified,
@@ -122,7 +122,7 @@ async function main() {
   _links.forEach(link => {
     links.push({
       url: link.link_url,
-      name: link.link_name,
+      name: he.decode(link.link_name),
       description: link.link_description,
       rel: link.link_rel,
     })
