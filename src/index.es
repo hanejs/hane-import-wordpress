@@ -72,16 +72,19 @@ async function main() {
 
       const tags = terms.filter(t => tag_ids.includes(t.term_id))
                         .map(term_tag_convert)
+                        .map(tag => tag.name)
+      const fileName = generateName(post.post_date, 'post')
       const p = {
         slug: post.post_name,
         title: post.post_title,
         create_time: post.post_date,
         update_time: post.post_modified,
-        html: true,
-        content: post.post_content,
+        type: 'html',
+        file: fileName + '.html',
         tags,
       }
-      fs.writeFileSync(path.join(SOURCE_DIR, `posts/${generateName(p.create_time, 'post')}.json`), JSON.stringify(p, null, 2))
+      fs.writeFileSync(path.join(SOURCE_DIR, `posts/${fileName}.html`), post.post_content)
+      fs.writeFileSync(path.join(SOURCE_DIR, `posts/${fileName}.json`), JSON.stringify(p, null, 2))
     }
   }
 
@@ -97,15 +100,17 @@ async function main() {
     const _pages = await db.query('SELECT * FROM ?? WHERE post_type = ? ORDER BY post_date LIMIT ' + i + ', 20;',
       [ PREFIX + 'posts', 'page' ])
     _pages.forEach(page => {
+      const fileName = generateName(page.post_date, 'page')
       const p = {
         slug: page.post_name,
         title: page.post_title,
         create_time: page.post_date,
         update_time: page.post_modified,
-        html: true,
-        content: page.post_content,
+        type: 'html',
+        file: fileName + '.html',
       }
-      fs.writeFileSync(path.join(SOURCE_DIR, `pages/${generateName(p.create_time, 'page')}.json`), JSON.stringify(p, null, 2))
+      fs.writeFileSync(path.join(SOURCE_DIR, `pages/${fileName}.html`), page.post_content)
+      fs.writeFileSync(path.join(SOURCE_DIR, `pages/${fileName}.json`), JSON.stringify(p, null, 2))
     })
   }
 
