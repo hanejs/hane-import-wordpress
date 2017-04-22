@@ -75,10 +75,11 @@ async function main() {
                         .map(tag => tag.name)
       const fileName = generateName(post.post_date, 'post')
       const p = {
+        wpId: post.ID,
         slug: decodeURI(post.post_name),
         title: post.post_title,
-        create_time: post.post_date,
-        update_time: post.post_modified,
+        createTime: post.post_date,
+        updateTime: post.post_modified,
         type: 'html',
         file: fileName + '.html',
         tags,
@@ -104,8 +105,8 @@ async function main() {
       const p = {
         slug: decodeURI(page.post_name),
         title: page.post_title,
-        create_time: page.post_date,
-        update_time: page.post_modified,
+        createTime: page.post_date,
+        updateTime: page.post_modified,
         type: 'html',
         file: fileName + '.html',
       }
